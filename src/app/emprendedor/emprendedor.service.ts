@@ -10,8 +10,23 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root'
 })
 export class EmprendedorService {
-  private url = environment.baseUrl;
+  private urlBase = environment.baseUrl;
 
 
-  constructor() { }
-}
+
+      constructor(private http: HttpClient) { }
+
+        getEmprendedores(): Observable<Emprendedor[]> {
+
+          return this.http.get<Emprendedor[]>(this.urlBase+"emprendedores.json");
+
+        }
+
+      getEmprendedor(id:number): Observable<Emprendedor>{
+
+          return this.http.get<Emprendedor>(this.urlBase + id.toString() + "/emprendedores.json");
+
+      }
+
+  }
+
